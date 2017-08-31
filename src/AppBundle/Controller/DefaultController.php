@@ -18,7 +18,7 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        // replace this example code with whatever you need
+
         return $this->render('default/index.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.project_dir')) . DIRECTORY_SEPARATOR,
         ]);
@@ -28,7 +28,7 @@ class DefaultController extends Controller
      * @Route("/contact", name="contact")
      */
 
-    public function showContactAction()
+    public function showContactAction(Request $request, \Swift_Mailer $mailer)
     {
         $form = $this->createFormBuilder()
             ->add('name', TextType::class, array('attr' => array('class' => 'form-control', 'placeholder' => 'Enter your name')))
@@ -36,6 +36,26 @@ class DefaultController extends Controller
             ->add('message', TextareaType::class, array('attr' => array('rows' => '10', 'class' => 'form-control', 'placeholder' => 'Enter your message here')))
             ->add('send', SubmitType::class, array('label' => 'Send!', 'attr' => array('class' => 'btn btn-lg btn-danger')))
             ->getForm();
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $formData = $form->getData();
+
+            $message = (new \Swift_Message())
+                ->setSubject("Contact mail from LaptopStore")
+                ->setFrom(array($formData["email"] => "General"))
+                ->setTo('laptopstoreBK@gmail.com')
+                ->setBody($formData["message"]."\n\n Please contact me on: ".$formData["email"]);
+
+            $mailer->send($message);
+
+            return $this->render('contact/contact.html.twig', array(
+                'form' => $form->createView(),
+                'formData' => $formData,
+                'success' => "BRAVO!"
+            ));
+        }
 
         return $this->render('contact/contact.html.twig', array(
             'form' => $form->createView()
