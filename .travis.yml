@@ -54,7 +54,7 @@ script:
   ## PHP_CodeSniffer
   - phpcs --report=emacs --standard=PSR2 app src
   ## PHP Copy/Paste Detector
-  - php phpcpd.phar --verbose app src
+  #- php phpcpd.phar --verbose app src
   ## PHP Mess Detector
   - phpmd . text cleancode --exclude vendor --exclude var --suffixes php
   - phpmd . text codesize --exclude vendor --exclude var --suffixes php
