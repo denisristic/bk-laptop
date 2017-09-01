@@ -56,12 +56,7 @@ script:
   ## PHP Copy/Paste Detector
   #- php phpcpd.phar --verbose app src
   ## PHP Mess Detector
-  - phpmd . text cleancode --exclude vendor --exclude var --suffixes php
-  - phpmd . text codesize --exclude vendor --exclude var --suffixes php
-  - phpmd . text controversial --exclude vendor --exclude var --suffixes php
-  - phpmd . text design --exclude vendor --exclude var --suffixes php
-  - phpmd . text naming --exclude vendor --exclude var --suffixes php
-  - phpmd . text unusedcode --exclude vendor --exclude var --suffixes php
+  - phpmd app,src text codesize,unusedcode,naming,design,controversial,cleancode --suffixes php
   ## PhpUnit
   - phpunit
   
