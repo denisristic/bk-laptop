@@ -52,16 +52,16 @@ install:
 # Run script
 script:
   ## PHP_CodeSniffer
-  - phpcs --report=emacs --standard=PSR2 . --ignore=vendor/*
+  - phpcs --report=emacs --standard=PSR2 app src
   ## PHP Copy/Paste Detector
-  - php phpcpd.phar --verbose .
+  - php phpcpd.phar --verbose app src
   ## PHP Mess Detector
-  - phpmd . text cleancode --exclude vendor
-  - phpmd . text codesize --exclude vendor
-  - phpmd . text controversial --exclude vendor
-  - phpmd . text design --exclude vendor
-  - phpmd . text naming --exclude vendor
-  - phpmd . text unusedcode --exclude vendor
+  - phpmd . text cleancode --exclude vendor --exclude var --suffixes php
+  - phpmd . text codesize --exclude vendor --exclude var --suffixes php
+  - phpmd . text controversial --exclude vendor --exclude var --suffixes php
+  - phpmd . text design --exclude vendor --exclude var --suffixes php
+  - phpmd . text naming --exclude vendor --exclude var --suffixes php
+  - phpmd . text unusedcode --exclude vendor --exclude var --suffixes php
   ## PhpUnit
   - phpunit
   
