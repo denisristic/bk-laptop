@@ -94,7 +94,11 @@
     <parameter key="kernel.container_class">appDevDebugProjectContainer</parameter>
     <parameter key="database_host">localhost</parameter>
     <parameter key="database_port">null</parameter>
+<<<<<<< HEAD
     <parameter key="database_name">logindb</parameter>
+=======
+    <parameter key="database_name">laptopstore</parameter>
+>>>>>>> 85e2bff418413fb8c6dd1736b8d016ea6b0f691c
     <parameter key="database_user">root</parameter>
     <parameter key="database_password">null</parameter>
     <parameter key="mailer_transport">smtp</parameter>
@@ -612,8 +616,13 @@
       <tag name="monolog.logger" channel="cache"/>
       <argument></argument>
       <argument>0</argument>
+<<<<<<< HEAD
       <argument>uxBG8EzZU-Bs4AhYzTEWV6</argument>
       <argument>C:\xampp\htdocs\bk-laptop\var\cache\dev/pools</argument>
+=======
+      <argument>wG4KdHl+2mwUTQC0qAPOZu</argument>
+      <argument>D:\xampp\htdocs\laptopstore\var\cache\dev/pools</argument>
+>>>>>>> 85e2bff418413fb8c6dd1736b8d016ea6b0f691c
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
@@ -622,7 +631,11 @@
       <tag name="monolog.logger" channel="cache"/>
       <argument></argument>
       <argument>0</argument>
+<<<<<<< HEAD
       <argument>uxBG8EzZU-Bs4AhYzTEWV6</argument>
+=======
+      <argument>wG4KdHl+2mwUTQC0qAPOZu</argument>
+>>>>>>> 85e2bff418413fb8c6dd1736b8d016ea6b0f691c
       <call method="setLogger">
         <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       </call>
@@ -2288,12 +2301,20 @@
     </service>
     <service id="security.authentication.listener.anonymous.main" class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
       <argument type="service" id="security.token_storage"/>
+<<<<<<< HEAD
       <argument>59ad5ae4860e86.95385457</argument>
+=======
+      <argument>59ad36231fecd5.46519802</argument>
+>>>>>>> 85e2bff418413fb8c6dd1736b8d016ea6b0f691c
       <argument type="service" id="monolog.logger.security" on-invalid="null"/>
       <argument type="service" id="security.authentication.manager"/>
     </service>
     <service id="security.authentication.provider.anonymous.main" class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
+<<<<<<< HEAD
       <argument>59ad5ae4860e86.95385457</argument>
+=======
+      <argument>59ad36231fecd5.46519802</argument>
+>>>>>>> 85e2bff418413fb8c6dd1736b8d016ea6b0f691c
     </service>
     <service id="security.exception_listener.main" class="Symfony\Component\Security\Http\Firewall\ExceptionListener" public="false">
       <argument type="service" id="security.token_storage"/>
@@ -2917,15 +2938,22 @@
     </service>
     <service id="doctrine.dbal.default_connection" class="Doctrine\DBAL\Connection">
       <argument type="collection">
+        <argument key="charset">utf8mb4</argument>
         <argument key="driver">pdo_mysql</argument>
         <argument key="host">localhost</argument>
         <argument key="port">null</argument>
+<<<<<<< HEAD
         <argument key="dbname">logindb</argument>
+=======
+        <argument key="dbname">laptopstore</argument>
+>>>>>>> 85e2bff418413fb8c6dd1736b8d016ea6b0f691c
         <argument key="user">root</argument>
         <argument key="password">null</argument>
-        <argument key="charset">UTF8</argument>
         <argument key="driverOptions" type="collection"/>
-        <argument key="defaultTableOptions" type="collection"/>
+        <argument key="defaultTableOptions" type="collection">
+          <argument key="charset">utf8mb4</argument>
+          <argument key="collate">utf8mb4_unicode_ci</argument>
+        </argument>
       </argument>
       <argument type="service" id="doctrine.dbal.default_connection.configuration"/>
       <argument type="service" id="doctrine.dbal.default_connection.event_manager"/>
@@ -3014,7 +3042,11 @@
     <service id="doctrine.orm.default_annotation_metadata_driver" class="Doctrine\ORM\Mapping\Driver\AnnotationDriver" public="false">
       <argument type="service" id="annotations.cached_reader"/>
       <argument type="collection">
+<<<<<<< HEAD
         <argument>C:\xampp\htdocs\bk-laptop\src\AppBundle\Entity</argument>
+=======
+        <argument>D:\xampp\htdocs\laptopstore\src\AppBundle\Entity</argument>
+>>>>>>> 85e2bff418413fb8c6dd1736b8d016ea6b0f691c
       </argument>
     </service>
     <service id="doctrine.orm.default_metadata_driver" class="Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain" public="false">
@@ -3553,32 +3585,52 @@
     <service id="cache.system.recorder_inner" class="Symfony\Component\Cache\Adapter\AdapterInterface" public="false" lazy="true">
       <argument>rgK5hymJ3k</argument>
       <argument>0</argument>
+<<<<<<< HEAD
       <argument>uxBG8EzZU-Bs4AhYzTEWV6</argument>
       <argument>C:\xampp\htdocs\bk-laptop\var\cache\dev/pools</argument>
+=======
+      <argument>wG4KdHl+2mwUTQC0qAPOZu</argument>
+      <argument>D:\xampp\htdocs\laptopstore\var\cache\dev/pools</argument>
+>>>>>>> 85e2bff418413fb8c6dd1736b8d016ea6b0f691c
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
     <service id="cache.validator.recorder_inner" class="Symfony\Component\Cache\Adapter\AdapterInterface" public="false" lazy="true">
       <argument>pCuAtadNhb</argument>
       <argument>0</argument>
+<<<<<<< HEAD
       <argument>uxBG8EzZU-Bs4AhYzTEWV6</argument>
       <argument>C:\xampp\htdocs\bk-laptop\var\cache\dev/pools</argument>
+=======
+      <argument>wG4KdHl+2mwUTQC0qAPOZu</argument>
+      <argument>D:\xampp\htdocs\laptopstore\var\cache\dev/pools</argument>
+>>>>>>> 85e2bff418413fb8c6dd1736b8d016ea6b0f691c
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
     <service id="cache.serializer.recorder_inner" class="Symfony\Component\Cache\Adapter\AdapterInterface" public="false" lazy="true">
       <argument>BrdKVJGxPS</argument>
       <argument>0</argument>
+<<<<<<< HEAD
       <argument>uxBG8EzZU-Bs4AhYzTEWV6</argument>
       <argument>C:\xampp\htdocs\bk-laptop\var\cache\dev/pools</argument>
+=======
+      <argument>wG4KdHl+2mwUTQC0qAPOZu</argument>
+      <argument>D:\xampp\htdocs\laptopstore\var\cache\dev/pools</argument>
+>>>>>>> 85e2bff418413fb8c6dd1736b8d016ea6b0f691c
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
     <service id="cache.annotations.recorder_inner" class="Symfony\Component\Cache\Adapter\AdapterInterface" public="false" lazy="true">
       <argument>nziWBo6g7E</argument>
       <argument>0</argument>
+<<<<<<< HEAD
       <argument>uxBG8EzZU-Bs4AhYzTEWV6</argument>
       <argument>C:\xampp\htdocs\bk-laptop\var\cache\dev/pools</argument>
+=======
+      <argument>wG4KdHl+2mwUTQC0qAPOZu</argument>
+      <argument>D:\xampp\htdocs\laptopstore\var\cache\dev/pools</argument>
+>>>>>>> 85e2bff418413fb8c6dd1736b8d016ea6b0f691c
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
