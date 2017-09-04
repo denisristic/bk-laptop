@@ -49,7 +49,8 @@ class Laptop
     private $state;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Year")
+     * @ORM\Column(type="integer")
+     * @Assert\Range(min=2000, max=2017, minMessage="Earliest year is 2000", maxMessage="Latest year is 2017")
      */
     private $year;
 
