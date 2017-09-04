@@ -1,19 +1,19 @@
 <?php
-
 /**
  * Created by PhpStorm.
  * User: abaudoin
- * Date: 1.9.2017.
- * Time: 15:11
+ * Date: 4.9.2017.
+ * Time: 13:12
  */
+
 namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="model")
+ * @ORM\Table(name="image")
  */
-class Model
+class Image
 {
     /**
      * @ORM\Column(type="integer")
@@ -25,16 +25,12 @@ class Model
     /**
      * @ORM\Column(type="string", length=200)
      */
-    private $model;
+    private $path;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Brand")
+     * @ORM\ManyToOne(targetEntity="Laptop", inversedBy="images")
      */
-    private $brand;
-
-    /**
-     * GETTERS AND SETTERS
-     */
+    private $laptop;
 
     /**
      * @return mixed
@@ -55,34 +51,16 @@ class Model
     /**
      * @return mixed
      */
-    public function getModel()
+    public function getPath()
     {
-        return $this->model;
+        return $this->path;
     }
 
     /**
-     * @param mixed $model
+     * @param mixed $path
      */
-    public function setModel($model)
+    public function setPath($path)
     {
-        $this->model = $model;
+        $this->path = $path;
     }
-
-    /**
-     * @return mixed
-     */
-    public function getBrand()
-    {
-        return $this->brand;
-    }
-
-    /**
-     * @param mixed $brand
-     */
-    public function setBrandId($brand)
-    {
-        $this->brand = $brand;
-    }
-
-
 }

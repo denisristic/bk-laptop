@@ -57,6 +57,23 @@ class Laptop
      */
     private $ram;
 
+    /**
+     * @ORM\OneToMany(targetEntity="LaptopExtras", mappedBy="laptop")
+     */
+    private $laptopExtras;
+
+    /**
+     * @return mixed
+     */
+
+    /**
+     * @ORM\OneToMany(targetEntity="Image", mappedBy="laptop")
+     */
+    private $images;
+
+    public function __construct() {
+        $this->images = new ArrayCollection();
+    }
 
     /**
      * GETTERS AND SETTERS
@@ -190,6 +207,18 @@ class Laptop
         $this->ram = $ram;
     }
 
+    public function getLaptopExtras()
+    {
+        return $this->laptopExtras;
+    }
+
+    /**
+     * @param mixed $laptopExtras
+     */
+    public function setLaptopExtras($laptopExtras)
+    {
+        $this->laptopExtras = $laptopExtras;
+    }
 
 
 
