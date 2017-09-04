@@ -8,6 +8,7 @@
  */
 namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -74,6 +75,17 @@ class Laptop
     public function __construct() {
         $this->images = new ArrayCollection();
     }
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $promoted;
+
+    /**
+     * @ORM\Column(type="integer")
+     * @Assert\Range(min=0, max=5, minMessage="Minimum rating is 0", maxMessage="Maximum rating is 5")
+     */
+    private $rating;
 
     /**
      * GETTERS AND SETTERS
@@ -218,6 +230,54 @@ class Laptop
     public function setLaptopExtras($laptopExtras)
     {
         $this->laptopExtras = $laptopExtras;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImages()
+    {
+        return $this->images;
+    }
+
+    /**
+     * @param mixed $images
+     */
+    public function setImages($images)
+    {
+        $this->images = $images;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPromoted()
+    {
+        return $this->promoted;
+    }
+
+    /**
+     * @param mixed $promoted
+     */
+    public function setPromoted($promoted)
+    {
+        $this->promoted = $promoted;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRating()
+    {
+        return $this->rating;
+    }
+
+    /**
+     * @param mixed $rating
+     */
+    public function setRating($rating)
+    {
+        $this->rating = $rating;
     }
 
 
