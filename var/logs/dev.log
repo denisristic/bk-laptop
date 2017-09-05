@@ -2211,3 +2211,5 @@
 [2017-09-04 15:26:31] doctrine.DEBUG: DROP INDEX IDX_E001563B40C1FEA7 ON laptop [] []
 [2017-09-04 15:26:31] doctrine.DEBUG: ALTER TABLE laptop ADD year INT NOT NULL, DROP year_id [] []
 >>>>>>> 85e2bff418413fb8c6dd1736b8d016ea6b0f691c
+[2017-09-05 10:38:47] console.ERROR: Error thrown while running command "cache:clear --no-dev". Message: "The "--no-dev" option does not exist." {"error":"[object] (Symfony\\Component\\Console\\Exception\\RuntimeException(code: 0): The \"--no-dev\" option does not exist. at D:\\xampp\\htdocs\\bk-laptop\\vendor\\symfony\\symfony\\src\\Symfony\\Component\\Console\\Input\\ArgvInput.php:224)","command":"cache:clear --no-dev","message":"The \"--no-dev\" option does not exist."} []
+[2017-09-05 10:38:47] console.DEBUG: Command "cache:clear --no-dev" exited with code "1" {"command":"cache:clear --no-dev","code":1} []
