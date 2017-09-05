@@ -6,13 +6,6 @@ security:
     providers:
         in_memory:
             memory:
-                users:
-                    admin:
-                        password: admin
-                        roles: 'ROLE_ADMIN'
-                    user:
-                        password: user
-                        roles: 'ROLE_USER'
         our_db_provider:
                     entity:
                         class: AppBundle:User
@@ -37,11 +30,20 @@ security:
             provider: our_db_provider
             anonymous: ~
             form_login:
-                login_path: login
-                check_path: login
+                login_path: /login
+                check_path: /login
+
+        secured_area:
+            pattern: ^/
+            anonymous: ~
+            logout:
+                path:   /logout
+                target: /login
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+
+
 
     access_control:
         # require ROLE_ADMIN for /admin*
