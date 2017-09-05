@@ -1,6 +1,95 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+<div id="wrapper">
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <li class="sidebar-brand">
+                <a href="#">
+                    Start Bootstrap
+                </a>
+            </li>
+            <li>
+                <a href="#">Dashboard</a>
+            </li>
+            <li>
+                <a href="#">Shortcuts</a>
+            </li>
+            <li>
+                <a href="#">Overview</a>
+            </li>
+            <li>
+                <a href="#">Events</a>
+            </li>
+            <li>
+                <a href="#">About</a>
+            </li>
+            <li>
+                <a href="#">Services</a>
+            </li>
+            <li>
+                <a href="#">Contact</a>
+            </li>
+        </ul>
+    </div>
+    <!-- /#sidebar-wrapper -->
+    <div class="container" id="page-content-wrapper">
+        <h2>Promoted</h2>
+        <div class="row">
+            {% for laptop in promoted %}
+                <div class="col-md-4 col-sm-12">
+                    <div class="col-md-12 well">
+                       <a href="{{ path('laptop_show', {'id': laptop.id}) }}">
+                           <h4 class="text-center">{{ laptop.title }}</h4>
+                        <p>
+                            {% for image in laptop.images %}
+                                {% if image.main %}
+                                <img src="{{ image.path }}" class="scale">
+                                {% endif %}
+                            {% endfor %}
+
+                        </p></a>
+                        <p>
+                            Price: {{ laptop.price }}
+                        </p>
+                        <p>
+                            Model and Brand: {{ laptop.model.brand.brandName }} - {{ laptop.model.model }}
+                        </p>
+                    </div>
+                </div>
+        {% endfor %}
+        </div>
+
+        <h2>Top rated</h2>
+        <div class="row">
+            {% for laptop in topRated %}
+                <div class="col-md-4">
+                    <div class="col-md-12 well">
+                        <a href="{{ path('laptop_show', {'id': laptop.id}) }}">
+                            <h4 class="text-center">{{ laptop.title }}</h4>
+
+                        <p>
+                            {% for image in laptop.images %}
+                                {% if image.main %}
+                                    <img src="{{ image.path }}" class="scale">
+                                {% endif %}
+                            {% endfor %}
+                        </p></a>
+                        <p>
+                            Price: {{ laptop.price }}
+                        </p>
+                        <p>
+                            Model and Brand: {{ laptop.model.brand.brandName }} - {{ laptop.model.model }}
+                        </p>
+                    </div>
+                </div>
+
+            {% endfor %}
+        </div>
+    </div>
+</div>
     {{ parent() }}
+
+
 {% endblock %}
 

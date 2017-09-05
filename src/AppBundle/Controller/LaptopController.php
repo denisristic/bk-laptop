@@ -1,44 +1,33 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: abaudoin
+ * Date: 5.9.2017.
+ * Time: 14:54
+ */
 
 namespace AppBundle\Controller;
 
+
 use AppBundle\Entity\Laptop;
-use AppBundle\Repository\LaptopRepository;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
-
-class DefaultController extends Controller
+class LaptopController extends Controller
 {
     /**
-     * @Route("/", name="homepage")
+     * @Route("/laptop/{id}", name="laptop_show")
      */
-    public function indexAction(Request $request)
-    {
-
+    public function showLaptopAction($id, Request $request, \Swift_Mailer $mailer) {
         $manager = $this->getDoctrine()->getManager();
         $repo = $manager->getRepository(Laptop::class);
-        $promoted = $repo->getPromotedLaptops();
-        $topRated = $repo->getTopRatedLaptops();
-        return $this->render('default/index.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.project_dir')) . DIRECTORY_SEPARATOR,
-            'promoted' => $promoted,
-            'topRated' => $topRated
-        ]);
-    }
+        $laptop = $repo->findOneBy(array('id' => $id));
 
-    /**
-     * @Route("/contact", name="contact")
-     */
-
-    public function showContactAction(Request $request, \Swift_Mailer $mailer)
-    {
         $form = $this->createFormBuilder()
             ->add('name', TextType::class, array('attr' => array('class' => 'form-control', 'placeholder' => 'Enter your name')))
             ->add('email', EmailType::class, array('attr' => array('class' => 'form-control', 'placeholder' => 'Enter your email')))
@@ -53,9 +42,9 @@ class DefaultController extends Controller
 
             $message = (new \Swift_Message())
                 ->setSubject("Contact mail from LaptopStore")
-                ->setFrom(array($formData["email"] => "General"))
+                ->setFrom(array($formData["email"] => $laptop->getTitle()))
                 ->setTo('laptopstoreBK@gmail.com')
-                ->setBody($formData["message"]."\n\n Please contact me on: ".$formData["email"]);
+                ->setBody($formData["message"]."\n\n Please contact me on: ".$formData["email"]."\n\n".$request->getUri());
 
             $mailer->send($message);
 
@@ -65,17 +54,9 @@ class DefaultController extends Controller
                 'success' => "BRAVO!"
             ));
         }
-
-        return $this->render('contact/contact.html.twig', array(
+        return $this->render('laptop/laptop.html.twig', array(
+            'laptop' => $laptop,
             'form' => $form->createView()
         ));
-    }
-
-    /**
-     * @Route("/admin")
-     */
-    public function adminAction()
-    {
-        return new Response('<html><body>Admin page!</body></html>');
     }
 }

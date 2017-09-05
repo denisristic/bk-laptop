@@ -41,6 +41,22 @@ class Extra
     }
 
     /**
+     * @return mixed
+     */
+    public function getLaptopExtras()
+    {
+        return $this->laptopExtras;
+    }
+
+    /**
+     * @param mixed $laptopExtras
+     */
+    public function setLaptopExtras($laptopExtras)
+    {
+        $this->laptopExtras = $laptopExtras;
+    }
+
+    /**
      * @param mixed $id
      */
     public function setId($id)

@@ -7,11 +7,13 @@
  * Time: 15:03
  */
 namespace AppBundle\Entity;
+
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use AppBundle\Repository;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\LaptopRepository")
  * @ORM\Table(name="laptop")
  */
 class Laptop

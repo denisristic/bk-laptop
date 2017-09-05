@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container ">
+        <div class="row well">
+            <h2 class="text-center">{{ laptop.title }}</h2>
+            <div class="col-md-6">
+                <p>
+                    {% for image in laptop.images %}
+                        {% if image.main %}
+                            <img src="{{ image.path }}" class="scale">
+                        {% endif %}
+                    {% endfor %}
+                </p>
+            </div>
+            <div class="col-md-6">
+                <h3>
+                    Brand and model: <span class="green">{{ laptop.model.brand.brandName }} - {{ laptop.model.model }}</span>
+                </h3>
+                <h3>
+                    State:<span class="green"> {{ laptop.state.state }}</span>
+                </h3>
+                <h3>
+                    Year: <span class="green">{{ laptop.year }}</span>
+                </h3>
+                <h3>
+                    RAM: <span class="green">{{ laptop.ram.ram }}</span>
+                </h3>
+                <h3>
+                    Price: <span class="green">${{ laptop.price }}</span>
+                </h3>
+                <h3>
+                    Extras:
+                    {% for extra in laptop.laptopExtras %}
+                    <span class="green">{{ extra.amount }}</span>x<span class="green">{{ extra.extra.extra }}</span>|
+                    {% endfor %}
+                </h3>
+
+            </div>
+
+        </div>
+        <div class="row well">
+
+            <div class="col-md-12">
+                {% if success is defined %}
+                    <h2>
+                        {{ success }}
+                    </h2>
+
+                {% else %}
+                    <h2><span class="glyphicon glyphicon-envelope"></span> Contact us about this product:</h2>
+                    {{ form_start(form) }}
+                    {{ form_widget(form) }}
+                    {{ form_end(form) }}
+                {% endif %}
+            </div>
+
+
+        </div>
+
+    </div>
+    {% block footer %}
+    {{ parent() }}
+    {% endblock %}
+
+{% endblock %}
+
