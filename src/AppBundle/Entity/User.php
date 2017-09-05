@@ -5,6 +5,8 @@
  * Date: 4.9.2017.
  * Time: 14:47
  */
+
+
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -16,13 +18,17 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
  */
-class User implements UserInterface, \Serializable
+
+class User implements UserInterface
 {
     /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
+
     private $id;
 
     /**
@@ -35,6 +41,7 @@ class User implements UserInterface, \Serializable
     /**
      * @ORM\Column(type="string", length=50)
      * @Assert\NotBlank()
+     * @var string
      */
     private $username;
 
@@ -99,16 +106,6 @@ class User implements UserInterface, \Serializable
             ) = unserialize($serialized);
     }
 
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    public function setEmail($email)
-    {
-        $this->email = $email;
-    }
-
     public function getUsername()
     {
         return $this->username;
@@ -129,14 +126,62 @@ class User implements UserInterface, \Serializable
         $this->plainPassword = $password;
     }
 
-    public function getPassword()
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
     {
-        return $this->password;
+        return $this->id;
     }
 
+    /**
+     * Set email
+     *
+     * @param string $email
+     *
+     * @return User
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Set password
+     *
+     * @param string $password
+     *
+     * @return User
+     */
     public function setPassword($password)
     {
         $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * Get password
+     *
+     * @return string
+     */
+    public function getPassword()
+    {
+        return $this->password;
     }
 
     public function getSalt()
@@ -145,4 +190,6 @@ class User implements UserInterface, \Serializable
         // You *may* need a real salt if you choose a different encoder.
         return null;
     }
+
 }
+

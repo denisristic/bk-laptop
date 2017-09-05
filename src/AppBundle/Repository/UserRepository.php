@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: vbubalo
@@ -22,3 +23,4 @@ class UserRepository extends EntityRepository implements UserLoaderInterface
             ->getOneOrNullResult();
     }
 }
+
