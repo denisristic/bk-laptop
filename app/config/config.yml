@@ -8,7 +8,7 @@ imports:
 parameters:
     locale: en
     database_host:     localhost
-    database_name:     logindb
+    database_name:     laptopstore
     database_user:     root
     database_password: null
 

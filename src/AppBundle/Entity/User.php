@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- * @ORM\Table(name="logindb")
+ * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
  */
 class User implements UserInterface, \Serializable
@@ -26,21 +26,21 @@ class User implements UserInterface, \Serializable
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255, unique=true)
+     * @ORM\Column(type="string", length=50)
      * @Assert\NotBlank()
      * @Assert\Email()
      */
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=255, unique=true)
+     * @ORM\Column(type="string", length=50)
      * @Assert\NotBlank()
      */
     private $username;
 
     /**
      * @Assert\NotBlank()
-     * @Assert\Length(max=4096)
+     * @Assert\Length(max=767)
      */
     private $plainPassword;
 
@@ -55,13 +55,13 @@ class User implements UserInterface, \Serializable
     // other properties and methods
 
     /**
-     * @ORM\Column(name="is_active", type="boolean")
+     * @ORM\Column(name="is_super_admin", type="boolean")
      */
-    private $isActive;
+    private $isSuperAdmin;
 
     public function __construct()
     {
-        $this->isActive = true;
+        $this->isSuperAdmin = false;
         // may not be needed, see section on salt below
         // $this->salt = md5(uniqid('', true));
     }
