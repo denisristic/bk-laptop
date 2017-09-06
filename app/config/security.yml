@@ -4,23 +4,28 @@ security:
             memory:
                 users:
                     admin:
-                        password: admin
+                        password: plaintext
+                        roles: 'ROLE_ADMIN'
+                    utest:
+                        password: utest
                         roles: 'ROLE_ADMIN'
     encoders:
         Symfony\Component\Security\Core\User\User: plaintext
 
     firewalls:
+        secured_area:
+            logout:
+                path:   /logout
+                target: /
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
         main:
             anonymous: ~
-            http_basic: ~
 
     access_control:
-        # require ROLE_ADMIN for /admin*
-        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/, roles: ROLE_ADMIN }
 
 #security:
 #    providers:
