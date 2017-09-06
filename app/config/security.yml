@@ -1,39 +1,66 @@
 security:
-  encoders:
-    AppBundle\Entity\User:
-      algorithm: bcrypt
-    AppBundle\Security\User\WebserviceUser:
-      algorithm: bcrypt
-      cost: 12
-    Symfony\Component\Security\Core\User\User: plaintext
-  firewalls:
-    dev:
-      pattern: ^/(_(profiler|wdt)|css|images|js)/
-      security: false
-    main:
-      anonymous: ~
-      form_login:
-        check_path: login
-        login_path: login
-      http_basic: ~
-      pattern: ^/login/
-      provider: our_db_provider
-  providers:
-    in_memory:
-      memory:
-        users:
-          admin:
-            password: admin
-            roles: ROLE_ADMIN
-    our_db_provider:
-      entity:
-        class: "AppBundle:User"
-        property: username
-    webservice:
-      id: AppBundle\Security\User\WebserviceUserProvider
-#access_control:
-#    - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-#    - { path: ^/, roles: ROLE_ADMIN }
+    providers:
+        in_memory:
+            memory:
+                users:
+                    user:
+                        password: user
+                        roles: 'ROLE_ADMIN'
+                    admin:
+                        password: admin
+                        roles: 'ROLE_ADMIN'
+    encoders:
+        Symfony\Component\Security\Core\User\User: plaintext
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            anonymous: ~
+            http_basic: ~
+            form_login:
+                login_path: login
+                check_path: login
+    access_control:
+        - { path: ^/admin, roles: ROLE_ADMIN }
+
+
+#security:
+#  encoders:
+#    AppBundle\Entity\User:
+#      algorithm: bcrypt
+#    AppBundle\Security\User\WebserviceUser:
+#      algorithm: bcrypt
+#      cost: 12
+#    Symfony\Component\Security\Core\User\User: plaintext
+#  firewalls:
+#    dev:
+#      pattern: ^/(_(profiler|wdt)|css|images|js)/
+#      security: false
+#    main:
+#      anonymous: ~
+#      form_login:
+#        check_path: login
+#        login_path: login
+#      http_basic: ~
+#      pattern: ^/login/
+#      provider: our_db_provider
+#  providers:
+#    in_memory:
+#      memory:
+#        users:
+#          admin:
+#            password: admin
+#            roles: ROLE_ADMIN
+#    our_db_provider:
+#      entity:
+#        class: "AppBundle:User"
+#        property: username
+#    webservice:
+#      id: AppBundle\Security\User\WebserviceUserProvider
+##access_control:
+##    - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+##    - { path: ^/, roles: ROLE_ADMIN }
 
 
 #security:
