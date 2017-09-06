@@ -31,7 +31,7 @@ class LoginController extends Controller
      * @Route("/login", name="login")
      */
 
-    public function showContactAction(Request $request, \Swift_Mailer $user)
+    public function showContactAction(Request $request)
     {
         $form = $this->createFormBuilder()
             ->add('username', TextType::class, array('attr' => array('class' => 'form-control', 'placeholder' => 'username')))
