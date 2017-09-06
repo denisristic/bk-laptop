@@ -1,31 +1,71 @@
 security:
-    providers:
-        in_memory:
-            memory:
-                users:
-                    admin:
-                        password: plaintext
-                        roles: 'ROLE_ADMIN'
-                    utest:
-                        password: utest
-                        roles: 'ROLE_ADMIN'
-    encoders:
-        Symfony\Component\Security\Core\User\User: plaintext
+  encoders:
+    AppBundle\Entity\User:
+      algorithm: bcrypt
+    AppBundle\Security\User\WebserviceUser:
+      algorithm: bcrypt
+      cost: 12
+    Symfony\Component\Security\Core\User\User: plaintext
+  firewalls:
+    dev:
+      pattern: ^/(_(profiler|wdt)|css|images|js)/
+      security: false
+    main:
+      anonymous: ~
+      form_login:
+        check_path: login
+        login_path: login
+      http_basic: ~
+      pattern: ^/login/
+      provider: our_db_provider
+  providers:
+    in_memory:
+      memory:
+        users:
+          admin:
+            password: admin
+            roles: ROLE_ADMIN
+    our_db_provider:
+      entity:
+        class: "AppBundle:User"
+        property: username
+    webservice:
+      id: AppBundle\Security\User\WebserviceUserProvider
+#access_control:
+#    - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+#    - { path: ^/, roles: ROLE_ADMIN }
 
-    firewalls:
-        secured_area:
-            logout:
-                path:   /logout
-                target: /
-        dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
-            security: false
 
-        main:
-            anonymous: ~
+#security:
+#    providers:
+#        in_memory:
+#            memory:
+#                users:
+#                    admin:
+#                        password: plaintext
+#                        roles: 'ROLE_ADMIN'
+#                    utest:
+#                        password: utest
+#                        roles: 'ROLE_ADMIN'
+#    encoders:
+#        Symfony\Component\Security\Core\User\User: plaintext
+#
+#    firewalls:
+#        secured_area:
+#            logout:
+#                path:   /logout
+#                target: /
+#        dev:
+#            pattern: ^/(_(profiler|wdt)|css|images|js)/
+#            security: false
+#
+#        main:
+#            anonymous: ~
+#
+#    access_control:
+#        - { path: ^/, roles: ROLE_ADMIN }
 
-    access_control:
-        - { path: ^/, roles: ROLE_ADMIN }
+
 
 #security:
 #    providers:
@@ -79,4 +119,4 @@ security:
 ##        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
 ##        - { path: ^/, roles: ROLE_ADMIN }
 #
-
+#
