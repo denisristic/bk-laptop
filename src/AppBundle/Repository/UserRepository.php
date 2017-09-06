@@ -8,6 +8,8 @@
  */
 namespace AppBundle\Repository;
 
+namespace AppBundle\Repository;
+
 use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
 use Doctrine\ORM\EntityRepository;
 
