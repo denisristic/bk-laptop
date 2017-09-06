@@ -63,12 +63,11 @@ class DefaultController extends Controller
         ));
     }
 
-   /**
-     * @Route("/account", name="account")
+    /**
+     * @Route("/admin")
      */
-    public function adminAction(Request $request)
+    public function adminAction()
     {
-       return $this->redirectToRoute('login');
-
+        return new Response('<html><body>Admin page!</body></html>');
     }
 }

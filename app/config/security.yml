@@ -1,52 +1,77 @@
-# To get started with security, check out the documentation:
-# https://symfony.com/doc/current/security.html
 security:
-
-    # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
         in_memory:
             memory:
-        our_db_provider:
-                    entity:
-                        class: AppBundle:User
-                        property: username
-
-        webservice:
-            id: AppBundle\Security\User\WebserviceUserProvider
-
+                users:
+                    admin:
+                        password: admin
+                        roles: 'ROLE_ADMIN'
     encoders:
         Symfony\Component\Security\Core\User\User: plaintext
-        AppBundle\Security\User\WebserviceUser:
-            algorithm: bcrypt
-            cost: 12
-        AppBundle\Entity\User:
-            algorithm: bcrypt
 
     firewalls:
-        # disables authentication for assets and the profiler, adapt it according to your needs
-        main:
-            pattern:    ^/
-            http_basic: ~
-            provider: our_db_provider
-            anonymous: ~
-            form_login:
-                login_path: /login
-                check_path: /login
-
-        secured_area:
-            pattern: ^/
-            anonymous: ~
-            logout:
-                path:   /logout
-                target: /login
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-
+        main:
+            anonymous: ~
+            http_basic: ~
 
     access_control:
         # require ROLE_ADMIN for /admin*
         - { path: ^/admin, roles: ROLE_ADMIN }
 
-
+#security:
+#    providers:
+#        in_memory:
+#            memory:
+#                users:
+###                    user:
+###                        password: user
+###                        roles: 'ROLE_USER'
+#                    admin1:
+#                        password: 0000
+#                        roles: 'ROLE_ADMIN'
+#        our_db_provider:
+#            entity:
+#                class: AppBundle:User
+#
+#        webservice:
+#            id: AppBundle\Security\User\WebserviceUserProvider
+#
+#    encoders:
+#        Symfony\Component\Security\Core\User\User: plaintext
+#        AppBundle\Security\User\WebserviceUser:
+#            algorithm: bcrypt
+#            cost: 12
+#        AppBundle\Entity\User:
+#            algorithm: bcrypt
+#
+#    firewalls:
+#        main:
+#            anonymous: ~
+#            pattern:    ^/
+#            http_basic: ~
+#            provider: our_db_provider
+#            form_login:
+#                login_path: /login
+#                check_path: /login
+#
+#        secured_area:
+#            pattern: ^/
+#            anonymous: ~
+#            logout:
+#                path:   /logout
+#                target: /
+#        dev:
+#            pattern: ^/(_(profiler|wdt)|css|images|js)/
+#            security: false
+#
+#
+##
+##    access_control:
+##        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+##        - { path: ^/, roles: ROLE_ADMIN }
+#
+#

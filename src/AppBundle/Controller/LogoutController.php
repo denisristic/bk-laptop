@@ -18,6 +18,7 @@ class LogoutController extends Controller
      */
     public function logoutAction()
     {
-        return $this->redirectToRoute('logout');
+        return $this->redirectToRoute('login');
     }
+
 }
