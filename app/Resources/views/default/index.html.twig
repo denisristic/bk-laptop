@@ -1,40 +1,75 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+
+    {#{% for key,value in filters %}#}
+        {#Key : {{ key }}#}
+        {#{% for key2,value2 in value %}#}
+            {#Key2 : {{ key2 }}#}
+            {#Value2: {{ value2.ram }}#}
+        {#{% endfor %}#}
+    {#{% endfor %}#}
 <div id="wrapper">
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
             <li class="sidebar-brand">
-                <a href="#">
-                    Start Bootstrap
-                </a>
+                <h4>
+                    Filters
+                </h4>
             </li>
+            {% for key,value in filters %}
+                <li class="filter-item">
+                    {{ key | upper }}
+                </li>
+                <div class="hidden test">
+
+                    {% for innerKey, innerValue in value %}
+                        <li>
+                        {% if key == "ram" %}
+                            <label>
+                                <input type="checkbox" name="ram" value="{{ innerValue.id}}">
+                                {{ innerValue.ram }}<br>
+                            </label>
+
+                        {% endif %}
+                        {% if key == "state" %}
+                        {{ innerValue.state }}
+                        {% endif %}
+                        {% if key == "brand" %}
+                        {{ innerValue.brandName }}
+                        {% endif %}
+                    {% endfor %}
+                        </li>
+
+
+                </div>
+                <hr>
+            {% endfor %}
+            <li class="filter-item">
+                PRICE
+            </li>
+            <li class="hidden">
+                <div class="form-inline">
+                    <input type="number" id="min-price" class="form-control half input-sm" placeholder="Min price">
+                </div>
+
+                <div class="form-inline">
+                    <input type="number" id="max-price" class="form-control half input-sm" placeholder="Max price">
+                </div>
+            </li>
+            <hr>
             <li>
-                <a href="#">Dashboard</a>
+                <div class="form-inline">
+                    <button id="filter-button" class="btn btn-sm btn-danger">Filter!</button>
+                </div>
             </li>
-            <li>
-                <a href="#">Shortcuts</a>
-            </li>
-            <li>
-                <a href="#">Overview</a>
-            </li>
-            <li>
-                <a href="#">Events</a>
-            </li>
-            <li>
-                <a href="#">About</a>
-            </li>
-            <li>
-                <a href="#">Services</a>
-            </li>
-            <li>
-                <a href="#">Contact</a>
-            </li>
+
+
         </ul>
     </div>
     <!-- /#sidebar-wrapper -->
     <div class="container" id="page-content-wrapper">
-        <h2>Promoted</h2>
+        <h2 class="green">Promoted</h2>
         <div class="row">
             {% for laptop in promoted %}
                 <div class="col-md-4 col-sm-12">
@@ -60,7 +95,7 @@
         {% endfor %}
         </div>
 
-        <h2>Top rated</h2>
+        <h2 class="green">Top rated</h2>
         <div class="row">
             {% for laptop in topRated %}
                 <div class="col-md-4">

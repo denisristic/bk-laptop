@@ -75,9 +75,6 @@ class Laptop
      */
     private $images;
 
-    public function __construct() {
-        $this->images = new ArrayCollection();
-    }
 
     /**
      * @ORM\Column(type="boolean")

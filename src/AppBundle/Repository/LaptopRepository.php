@@ -31,4 +31,42 @@ class LaptopRepository extends EntityRepository
         return $qb->getQuery()
             ->getResult();
     }
+
+    public function getFilteredLaptops($request) {
+        $minPrice = $request->request->get('price')['minPrice'] ? $request->request->get('price')['minPrice'] : "0" ;
+        $maxPrice = $request->request->get('price')['maxPrice'] ? $request->request->get('price')['maxPrice'] : "15000";
+
+        $ram = $request->request->get('ram');
+        $brand = $request->request->get('brand');
+        $state = $request->request->get('state');
+
+        $query = $this->createQueryBuilder('l')
+            ->where('l.price BETWEEN '.$minPrice.'AND '.$maxPrice);
+
+        if($ram) {
+            $query = $query
+                ->andWhere('l.ram IN (:ram)')
+                ->setParameter('ram',$ram);
+        }
+
+        if($state) {
+            $query = $query
+                ->andWhere('l.state IN (:state)')
+                ->setParameter('state',$state);
+        }
+
+        $laptops = $query->getQuery()->getResult();
+
+        if($brand) {
+
+            $finalResult = array();
+            foreach ($laptops as $laptop) {
+                if(in_array($laptop->getModel()->getBrand()->getId(),$brand))
+                    $finalResult[] = $laptop;
+            }
+            return $finalResult;
+        }
+
+        return $laptops;
+    }
 }
