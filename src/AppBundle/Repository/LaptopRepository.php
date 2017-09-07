@@ -16,6 +16,7 @@ class LaptopRepository extends EntityRepository
         $qb = $this->createQueryBuilder('l')
             ->select('l')
             ->where('l.promoted = 1')
+            ->andWhere('l.isActive = 1')
             ->setMaxResults(3);
 
         return $qb->getQuery()
@@ -25,6 +26,7 @@ class LaptopRepository extends EntityRepository
     public function getTopRatedLaptops() {
         $qb = $this->createQueryBuilder('l')
             ->select('l')
+            ->Where('l.isActive = 1')
             ->orderBy('l.rating','DESC')
             ->setMaxResults(3);
 
@@ -32,16 +34,17 @@ class LaptopRepository extends EntityRepository
             ->getResult();
     }
 
-    public function getFilteredLaptops($request) {
-        $minPrice = $request->request->get('price')['minPrice'] ? $request->request->get('price')['minPrice'] : "0" ;
-        $maxPrice = $request->request->get('price')['maxPrice'] ? $request->request->get('price')['maxPrice'] : "15000";
+    public function getFilteredLaptops($data) {
+        $minPrice = $data->get('price')['minPrice'] ? $data->get('price')['minPrice'] : "0" ;
+        $maxPrice = $data->get('price')['maxPrice'] ? $data->get('price')['maxPrice'] : "15000";
 
-        $ram = $request->request->get('ram');
-        $brand = $request->request->get('brand');
-        $state = $request->request->get('state');
+        $ram = $data->get('ram');
+        $brand = $data->get('brand');
+        $state = $data->get('state');
 
         $query = $this->createQueryBuilder('l')
-            ->where('l.price BETWEEN '.$minPrice.'AND '.$maxPrice);
+            ->where('l.price BETWEEN '.$minPrice.'AND '.$maxPrice)
+            ->andWhere('l.isActive = 1');
 
         if($ram) {
             $query = $query
@@ -68,5 +71,27 @@ class LaptopRepository extends EntityRepository
         }
 
         return $laptops;
+    }
+
+    public function deactivateLaptopsById($data) {
+        $laptopIds = $data->get('laptopIds');
+
+        $this->createQueryBuilder('l')
+            ->update('AppBundle:Laptop','l')
+            ->where('l.id IN (:ids)')
+            ->setParameter('ids', $laptopIds)
+            ->set('l.isActive', 0)
+            ->getQuery()->execute();
+    }
+
+    public function activateLaptopsById($data) {
+        $laptopIds = $data->get('laptopIds');
+
+        $this->createQueryBuilder('l')
+            ->update('AppBundle:Laptop','l')
+            ->where('l.id IN (:ids)')
+            ->setParameter('ids', $laptopIds)
+            ->set('l.isActive', 1)
+            ->getQuery()->execute();
     }
 }

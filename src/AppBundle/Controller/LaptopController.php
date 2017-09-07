@@ -10,6 +10,7 @@ namespace AppBundle\Controller;
 
 
 use AppBundle\Entity\Laptop;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -58,5 +59,21 @@ class LaptopController extends Controller
             'laptop' => $laptop,
             'form' => $form->createView()
         ));
+    }
+
+    /**
+     * @Route("/filter", name="filter")
+     * @Method({"GET", "POST"})
+     */
+    public function ajaxFilterLaptopAction(Request $request)
+    {
+        $manager = $this->getDoctrine()->getManager();
+        $laptopRepo = $manager->getRepository(Laptop::class);
+
+        $laptops = $laptopRepo->getFilteredLaptops($request->request);
+
+        return $this->render('filters/filters.html.twig', [
+            'laptops' => $laptops,
+        ]);
     }
 }

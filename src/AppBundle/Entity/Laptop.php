@@ -88,6 +88,27 @@ class Laptop
     private $rating;
 
     /**
+     * @ORM\Column(type="boolean", options={"default":1})
+     */
+    private $isActive;
+
+    /**
+     * @return mixed
+     */
+    public function getisActive()
+    {
+        return $this->isActive;
+    }
+
+    /**
+     * @param mixed $isActive
+     */
+    public function setIsActive($isActive)
+    {
+        $this->isActive = $isActive;
+    }
+
+    /**
      * GETTERS AND SETTERS
      */
 

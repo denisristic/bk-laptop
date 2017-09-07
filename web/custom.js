@@ -34,4 +34,31 @@ $( document ).ready(function() {
             $("#page-content-wrapper").html(result);
         }});
     });
+
+
+    $("body").on("click", ".btn.btn-sm.btn-danger", function(){
+
+        var laptopIds = $('input[name=active]:checked').map(function () { return this.value; }).toArray();
+        $.ajax({
+            type: 'post', // performing a POST request
+            data : {
+                laptopIds : laptopIds
+            },
+            url: "/admin/deactivate-laptop", success: function(result){
+                $(".container.laptop-table").html(result);
+            }});
+    });
+
+    $("body").on("click", ".btn.btn-sm.btn-primary", function(){
+
+        var laptopIds = $('input[name=inactive]:checked').map(function () { return this.value; }).toArray();
+        $.ajax({
+            type: 'post', // performing a POST request
+            data : {
+                laptopIds : laptopIds
+            },
+            url: "/admin/activate-laptop", success: function(result){
+                $(".container.laptop-table").html(result);
+            }});
+    });
 });

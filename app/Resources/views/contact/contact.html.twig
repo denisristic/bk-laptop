@@ -24,9 +24,9 @@
         </div>
 
     </div>
-    {#{% block footer %}#}
-        {#{{ parent() }}#}
-    {#{% endblock %}#}
+    {% block footer %}
+        {{ parent() }}
+    {% endblock %}
 
 {% endblock %}
 
