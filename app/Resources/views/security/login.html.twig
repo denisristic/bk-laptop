@@ -11,10 +11,10 @@
 
         <form action="{{ path('login') }}" method="post">
             <label for="username">Username:</label>
-            <input class="form-control" type="text" id="username" name="_username" value="{{ last_username }}" />
+            <input class="form-control" type="text" id="username" name="_username" value="{{ last_username }}" placeholder="username" />
 
             <label for="password">Password:</label>
-            <input class="form-control"  type="password" id="password" name="_password" />
+            <input class="form-control"  type="password" id="password" name="_password" placeholder="password"/>
 
             {#
                 If you want to control the URL the user
@@ -22,7 +22,6 @@
                 <input type="hidden" name="_target_path" value="/account" />
             #}
 
-            <button
             <button class="btn btn-lg btn-danger" type="submit">login</button>
         </form>
     </div>

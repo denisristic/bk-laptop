@@ -1,23 +1,16 @@
 security:
     providers:
         in_memory:
-            memory:
-                users:
-                    user:
-                        password: user
-                        roles: 'ROLE_ADMIN'
-                    admin:
-                        password: plaintext
-                        roles: 'ROLE_ADMIN'
-    encoders:
-        Symfony\Component\Security\Core\User\User: plaintext
-        AppBundle\Entity\User:
-            algorithm: bcrypt
-    providers:
+            memory: ~
         our_db_provider:
             entity:
                 class: AppBundle:User
                 property: username
+    encoders:
+        Symfony\Component\Security\Core\User\User: plaintext
+        AppBundle\Entity\User:
+            algorithm: bcrypt
+
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -26,7 +19,7 @@ security:
             anonymous: ~
             http_basic: ~
             pattern:    ^/
-#            provider: our_db_provider
+            provider: our_db_provider
             form_login:
                 login_path: login
                 check_path: login
