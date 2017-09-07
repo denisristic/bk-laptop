@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+
+
+        <div class="row">
+
+            <div class="col-md-6 col-md-offset-3 well">
+                {% if success is defined %}
+                    <h2>
+                        {{ success }}
+                    </h2>
+
+                {% else %}
+                    <h2><span class="glyphicon glyphicon-registration-mark"></span> Register:</h2>
+                    {{ form_start(form) }}
+                    {{ form_row(form.username) }}
+                    {{ form_row(form.email) }}
+                    {{ form_row(form.plainPassword.first) }}
+                    {{ form_row(form.plainPassword.second) }}
+
+                    <button type="submit">Register!</button>
+                    {{ form_end(form) }}
+                {% endif %}
+            </div>
+
+
+        </div>
+
+    </div>
+    {% block footer %}
+        {{ parent() }}
+    {% endblock %}
+
+{% endblock %}
+
