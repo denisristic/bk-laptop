@@ -1,10 +1,13 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: vbubalo
  * Date: 4.9.2017.
  * Time: 15:20
  */
+namespace AppBundle\Repository;
+
 namespace AppBundle\Repository;
 
 use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
@@ -22,3 +25,4 @@ class UserRepository extends EntityRepository implements UserLoaderInterface
             ->getOneOrNullResult();
     }
 }
+

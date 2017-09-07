@@ -1,142 +1,114 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: vbubalo
- * Date: 4.9.2017.
- * Time: 14:47
- */
+
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
-/**
- * @ORM\Table(name="user")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
- */
+
+    /**
+     * @ORM\Table(name="user")
+    @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
+
+     */
+
 class User implements UserInterface, \Serializable
 {
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
+/**
+* @ORM\Column(type="integer")
+* @ORM\Id
+* @ORM\GeneratedValue(strategy="AUTO")
+*/
+private $id;
 
-    /**
-     * @ORM\Column(type="string", length=50)
-     * @Assert\NotBlank()
-     * @Assert\Email()
-     */
-    private $email;
+/**
+* @ORM\Column(type="string", length=25, unique=true)
+*/
+private $username;
 
-    /**
-     * @ORM\Column(type="string", length=50)
-     * @Assert\NotBlank()
-     */
-    private $username;
+/**
+* @ORM\Column(type="string", length=64)
+*/
+private $password;
 
-    /**
-     * @Assert\NotBlank()
-     * @Assert\Length(max=767)
-     */
-    private $plainPassword;
-
-    /**
-     * The below length depends on the "algorithm" you use for encoding
-     * the password, but this works well with bcrypt.
-     *
-     * @ORM\Column(type="string", length=64)
-     */
-    private $password;
-
-    // other properties and methods
-
-    /**
-     * @ORM\Column(name="is_super_admin", type="boolean")
-     */
-    private $isSuperAdmin;
-
-    public function __construct()
-    {
-        $this->isSuperAdmin = false;
-        // may not be needed, see section on salt below
-        // $this->salt = md5(uniqid('', true));
-    }
-
-    public function getRoles()
-    {
-        return array('ROLE_USER');
-    }
-
-    public function eraseCredentials()
-    {
-    }
-
-    /** @see \Serializable::serialize() */
-    public function serialize()
-    {
-        return serialize(array(
-            $this->id,
-            $this->username,
-            $this->password,
-            // see section on salt below
-            // $this->salt,
-        ));
-    }
-
-    /** @see \Serializable::unserialize() */
-    public function unserialize($serialized)
-    {
-        list (
-            $this->id,
-            $this->username,
-            $this->password,
-            // see section on salt below
-            // $this->salt
-            ) = unserialize($serialized);
-    }
-
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    public function setEmail($email)
-    {
-        $this->email = $email;
-    }
 
     public function getUsername()
     {
         return $this->username;
     }
 
-    public function setUsername($username)
+/**
+* @ORM\Column(type="string", length=60, unique=true)
+*/
+private $email;
+
+/**
+* @ORM\Column(name="is_active", type="boolean")
+*/
+private $isActive;
+
+public function __construct()
+{
+$this->isActive = true;
+
+}
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
     {
-        $this->username = $username;
+        return $this->id;
     }
 
-    public function getPlainPassword()
+    /**
+     * Set email
+     *
+     * @param string $email
+     *
+     * @return User
+     */
+    public function setEmail($email)
     {
-        return $this->plainPassword;
+        $this->email = $email;
+
+        return $this;
     }
 
-    public function setPlainPassword($password)
+    /**
+     * Get email
+     *
+     * @return string
+     */
+    public function getEmail()
     {
-        $this->plainPassword = $password;
+        return $this->email;
     }
 
-    public function getPassword()
-    {
-        return $this->password;
-    }
-
+    /**
+     * Set password
+     *
+     * @param string $password
+     *
+     * @return User
+     */
     public function setPassword($password)
     {
         $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * Get password
+     *
+     * @return string
+     */
+    public function getPassword()
+    {
+        return $this->password;
     }
 
     public function getSalt()
@@ -145,4 +117,41 @@ class User implements UserInterface, \Serializable
         // You *may* need a real salt if you choose a different encoder.
         return null;
     }
+
+
+
+
+public function getRoles()
+{
+return array('ROLE_ADMIN');
 }
+
+public function eraseCredentials()
+{
+}
+
+/** @see \Serializable::serialize() */
+public function serialize()
+{
+return serialize(array(
+$this->id,
+$this->username,
+$this->password,
+// see section on salt below
+// $this->salt,
+));}
+
+
+/** @see \Serializable::unserialize() */
+public function unserialize($serialized)
+{
+list (
+$this->id,
+$this->username,
+$this->password,
+// see section on salt below
+// $this->salt
+) = unserialize($serialized);
+}}
+
+
