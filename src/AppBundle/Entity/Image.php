@@ -28,6 +28,27 @@ class Image
     private $path;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    private $main;
+
+    /**
+     * @return mixed
+     */
+    public function getMain()
+    {
+        return $this->main;
+    }
+
+    /**
+     * @param mixed $main
+     */
+    public function setMain($main)
+    {
+        $this->main = $main;
+    }
+
+    /**
      * @ORM\ManyToOne(targetEntity="Laptop", inversedBy="images")
      */
     private $laptop;

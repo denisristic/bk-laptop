@@ -2,6 +2,12 @@
 
 namespace AppBundle\Controller;
 
+
+use AppBundle\Entity\Laptop;
+use AppBundle\Entity\Brand;
+use AppBundle\Entity\State;
+use AppBundle\Entity\Ram;
+use AppBundle\Repository\LaptopRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -20,8 +26,29 @@ class DefaultController extends Controller
     public function indexAction(Request $request)
     {
 
+        $manager = $this->getDoctrine()->getManager();
+        $filterData = array();
+
+        $laptopRepo = $manager->getRepository(Laptop::class);
+        $brandRepo = $manager->getRepository(Brand::class);
+        $ramRepo = $manager->getRepository(Ram::class);
+        $stateRepo = $manager->getRepository(State::class);
+        $promoted = $laptopRepo->getPromotedLaptops();
+        $topRated = $laptopRepo->getTopRatedLaptops();
+
+        $brands = $brandRepo->findAll();
+        $ram = $ramRepo->findAll();
+        $state = $stateRepo->findAll();
+
+        $filterData["ram"] = $ram;
+        $filterData["brand"] = $brands;
+        $filterData["state"] = $state;
+
         return $this->render('default/index.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.project_dir')) . DIRECTORY_SEPARATOR,
+            'promoted' => $promoted,
+            'topRated' => $topRated,
+            'filters' => $filterData
         ]);
     }
 
