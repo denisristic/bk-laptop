@@ -33,10 +33,17 @@
 
                         {% endif %}
                         {% if key == "state" %}
-                        {{ innerValue.state }}
+                            <label>
+                                <input type="checkbox" name="state" value="{{ innerValue.id}}">
+                                {{ innerValue.state }}<br>
+                            </label>
+
                         {% endif %}
                         {% if key == "brand" %}
-                        {{ innerValue.brandName }}
+                            <label>
+                                <input type="checkbox" name="brand" value="{{ innerValue.id}}">
+                                {{ innerValue.brandName }}<br>
+                            </label>
                         {% endif %}
                     {% endfor %}
                         </li>

@@ -16,6 +16,8 @@ $( document ).ready(function() {
         var minPrice = $('#min-price').val();
         var maxPrice = $('#max-price').val();
         var ram = $('input[name=ram]:checked').map(function () { return this.value; }).toArray();
+        var state = $('input[name=state]:checked').map(function () { return this.value; }).toArray();
+        var brand = $('input[name=brand]:checked').map(function () { return this.value; }).toArray();
 
         $.ajax({
             type: 'post', // performing a POST request
@@ -25,8 +27,8 @@ $( document ).ready(function() {
                     maxPrice : maxPrice
                 },
                 ram : ram,
-                brand : [],
-                state : []
+                brand : brand,
+                state : state
             },
             url: "/filter", success: function(result){
             $("#page-content-wrapper").html(result);

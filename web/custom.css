@@ -34,6 +34,14 @@ body {
     overflow-x: hidden;
 }
 
+.row {
+    margin-top:15px;
+}
+
+.navbar {
+    margin-bottom:0
+}
+
 #wrapper {
     padding-left: 0;
     -webkit-transition: all 0.5s ease;
