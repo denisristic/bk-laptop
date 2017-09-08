@@ -45,14 +45,14 @@ class LoginController extends Controller
         if($form->isSubmitted() && $form->isValid()) {
             $formData = $form->getData();
 
-            return $this->render('login/login.html.twig', array(
+            return $this->render('security/login.html.twig', array(
                 'form' => $form->createView(),
                 'formData' => $formData,
                 'success' => "Welcome!"
             ));
         }
 
-        return $this->render('login/login.html.twig', array(
+        return $this->render('security/login.html.twig', array(
             'form' => $form->createView()
         ));
     }

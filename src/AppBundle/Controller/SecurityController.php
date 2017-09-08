@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: vbubalo
- * Date: 4.9.2017.
- * Time: 10:39
- */
 
 namespace AppBundle\Controller;
 
@@ -28,7 +22,7 @@ class SecurityController extends Controller
 
         return $this->render('security/login.html.twig', array(
             'last_username' => $lastUsername,
-            'error'         => $error,
+            'error' => $error,
         ));
     }
 }

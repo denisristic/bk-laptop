@@ -95,6 +95,6 @@ class DefaultController extends Controller
      */
     public function adminAction()
     {
-        return new Response('<html><body>Admin page!</body></html>');
+        return $this->render('admin/admin.html.twig');
     }
 }
